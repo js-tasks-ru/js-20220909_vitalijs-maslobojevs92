@@ -8,7 +8,13 @@ export function sortStrings(arr, param = 'asc') {
   const strArr = [...arr];
   const comparedProps = [['ru', 'en'], { sensitivity: 'variant', caseFirst: 'upper' }];
 
-  if (param === 'asc') return strArr.sort((a, b) => a.localeCompare(b, ...comparedProps));
+  return strArr.sort((a, b) => {
+    if (param === 'asc') {
+      return a.localeCompare(b, ...comparedProps);
+    }
 
-  if (param === 'desc') return strArr.sort((a, b) => b.localeCompare(a, ...comparedProps));
+    if (param === 'desc') {
+      return b.localeCompare(a, ...comparedProps);
+    }
+  });
 }

@@ -6,10 +6,11 @@
  */
 export const omit = (obj, ...fields) => {
   const result = {};
-  const arr = Object.keys(obj);
 
-  for (let elem of arr) {
-    if (!fields.includes(elem)) result[elem] = obj[elem];
+  for (const key in obj) {
+    if (!fields.includes(key)) {
+      result[key] = obj[key];
+    }
   }
 
   return result;
