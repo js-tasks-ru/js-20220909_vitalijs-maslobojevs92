@@ -13,7 +13,7 @@ export function trimSymbols(string, size) {
   if (!size || string === '') return string;
 
   return symbols.reduce((prev, next) => {
-    if (next === prev.at(-1)) {
+    if (next === prev[prev.length - 1]) { //prev.at(-1) на гите не работает
       if (counter !== size) {
         counter++;
 
