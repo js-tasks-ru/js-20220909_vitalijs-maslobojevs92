@@ -1,4 +1,4 @@
-import ColumnChart from '../solution/index.js';
+import ColumnChart from './index.js';
 
 describe('oop-basic-intro-to-dom/column-chart', () => {
   let columnChart;
@@ -18,6 +18,7 @@ describe('oop-basic-intro-to-dom/column-chart', () => {
     columnChart.destroy();
     columnChart = null;
   });
+
 
   it('should be rendered correctly', () => {
     expect(columnChart.element).toBeInTheDocument();
