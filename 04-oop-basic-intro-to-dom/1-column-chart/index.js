@@ -32,7 +32,7 @@ export default class ColumnChart {
     const elements = this.columnChart.querySelectorAll('[data-element]');
 
     for (const subElement of elements) {
-      const name = subElement.dataset.elemet;
+      const name = subElement.dataset.element;
 
       result[name] = subElement;
     }
@@ -85,9 +85,8 @@ export default class ColumnChart {
 
     this.data = data;
 
-    this.subElements.body = `
-      ${this.createCharts(this.getColumnProps(data))}
-    `;
+    this.subElements.body.innerHTML = 
+      this.createCharts(this.getColumnProps(data));
   }
 
   destroy() {
