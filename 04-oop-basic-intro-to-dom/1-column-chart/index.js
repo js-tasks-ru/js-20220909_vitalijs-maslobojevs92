@@ -42,7 +42,7 @@ export default class ColumnChart {
 
   getTemplate() {
     const titleLink = this.link ? `<a href="${this.link}" class="column-chart__link">View all</a>` : '';
-    const headerData = this.formatHeading ? this.formatHeading(this.value) : this.value;
+    const headerData = this.formatHeading(this.value);
     const rootElemClassName = this.data.length ? `column-chart` : `column-chart column-chart_loading`;
 
     return `
