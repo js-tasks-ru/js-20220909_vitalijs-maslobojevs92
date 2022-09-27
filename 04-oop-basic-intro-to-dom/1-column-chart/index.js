@@ -13,7 +13,7 @@ export default class ColumnChart {
     this.label = label;
     this.value = value;
     this.link = link;
-    this.formatHeading = formatHeading;
+    this.formatHeading = formatHeading(value);
 
     this.render();
   }
@@ -42,7 +42,7 @@ export default class ColumnChart {
 
   getTemplate() {
     const titleLink = this.link ? `<a href="${this.link}" class="column-chart__link">View all</a>` : '';
-    const headerData = this.formatHeading(this.value);
+    const headerData = this.formatHeading;
     const rootElemClassName = this.data.length ? `column-chart` : `column-chart column-chart_loading`;
 
     return `
