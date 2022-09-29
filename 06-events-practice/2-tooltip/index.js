@@ -13,7 +13,6 @@ class Tooltip {
     //нужно ли создавать отдельный метод, что бы можно было убить событие pointerover?
     document.addEventListener('pointerover', e => {
       if (e.target.closest('[data-tooltip]')) {
-
         this.render(e.target.dataset.tooltip);
 
         document.addEventListener('pointermove', this.onPointerMove);  
