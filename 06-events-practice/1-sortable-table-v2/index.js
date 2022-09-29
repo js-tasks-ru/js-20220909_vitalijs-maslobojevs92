@@ -27,10 +27,10 @@ export default class SortableTable {
   }
 
   init() {
-    this.subElements.header.addEventListener('pointerdown', this.SortTableOnClick);
+    this.subElements.header.addEventListener('pointerdown', this.sortTableOnClick);
   }
 
-  SortTableOnClick = (e) => {
+  sortTableOnClick = (e) => {
     e.preventDefault();
     
     const field = e.target.closest('[data-sortable="true"]');
