@@ -28,6 +28,8 @@ class Tooltip {
 
   onPointerMove = (e) => {
     //При залезании тултипа за границу документа, тултип смещается на противоположную сторону курсора.
+    const tooltipWidth = this.tooltip.clientWidth;
+    const tooltipHeiht = this.tooltip.clientHeight;
     
     let indentX = 10;
     let indentY = 10;
@@ -35,13 +37,13 @@ class Tooltip {
     let PosX = e.clientX;
     let PosY = e.clientY;
 
-    if (document.documentElement.clientWidth < PosX + indentX + this.tooltip.clientWidth) {
-      PosX -= this.tooltip.clientWidth;
+    if (document.documentElement.clientWidth < PosX + indentX + tooltipWidth) {
+      PosX -= tooltipWidth;
       indentX = -indentX; 
     }
 
-    if (document.documentElement.clientHeight < PosY + indentY + this.tooltip.clientHeight) {
-      PosY -= this.tooltip.clientHeight;
+    if (document.documentElement.clientHeight < PosY + indentY + tooltipHeiht) {
+      PosY -= tooltipHeiht;
       indentY = -indentY; 
     }
 
