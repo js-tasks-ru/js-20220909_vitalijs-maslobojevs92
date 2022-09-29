@@ -48,12 +48,8 @@ export default class NotificationMessage {
     `;
   }
 
-  show(target) {
-    if (target) {
-      target.append(NotificationMessage.rootElement);
-    } else {
-      document.body.append(NotificationMessage.rootElement);
-    }
+  show(target = document.body) {
+    target.append(NotificationMessage.rootElement);
 
     NotificationMessage.timer = setTimeout(this.destroy.bind(this), this.duration);
   }
