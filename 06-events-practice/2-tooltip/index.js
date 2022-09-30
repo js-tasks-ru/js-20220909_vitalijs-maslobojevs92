@@ -10,22 +10,30 @@ class Tooltip {
   }
 
   initialize () {
-    //нужно ли создавать отдельный метод, что бы можно было убить событие pointerover?
-    document.addEventListener('pointerover', e => {
-      if (e.target.closest('[data-tooltip]')) {
-        this.render(e.target.dataset.tooltip);
+    document.addEventListener('pointerover', this.onPointerOver);
+  }
 
-        document.addEventListener('pointermove', this.onPointerMove);  
-        document.addEventListener('pointerout', this.onPointerOut);
-      }
-    });
+  onPointerOver = (e) => {
+    if (e.target.closest('[data-tooltip]')) {
+      this.render(e.target.dataset.tooltip);
+
+      document.addEventListener('pointermove', this.onPointerMove);  
+      document.addEventListener('pointerout', this.onPointerOut);
+    }
   }
 
   onPointerOut = () => {
-    this.destroy();
+    this.remove();
+
+    document.removeEventListener('pointermove', this.onPointerMove);
+    document.removeEventListener('pointerout', this.onPointerOut);
   }
 
   onPointerMove = (e) => {
+    this.moveTooltip(e);
+  }
+
+  moveTooltip(e) {
     //При залезании тултипа за границу документа, тултип смещается на противоположную сторону курсора.
     const tooltipWidth = this.tooltip.clientWidth;
     const tooltipHeiht = this.tooltip.clientHeight;
@@ -48,7 +56,6 @@ class Tooltip {
 
     this.tooltip.style.top = indentY + PosY + "px";
     this.tooltip.style.left = indentX + PosX + "px";
-  
   }
 
   render(text) {
@@ -59,15 +66,19 @@ class Tooltip {
     document.body.append(this.tooltip);
   }
 
-
-  destroy() {
-    document.removeEventListener('pointermove', this.onPointerMove); 
-    document.removeEventListener('pointerout', this.onPointerOur);
-
+  remove() {
     if (this.tooltip) {
       this.tooltip.remove();
       this.tooltip = null;
     } 
+  }
+
+  destroy() {
+    document.removeEventListener('pointermove', this.onPointerMove); 
+    document.removeEventListener('pointerout', this.onPointerOut);
+    document.addEventListener('pointerover', this.onPointerOver);
+
+    this.remove();
   }
 
   get element() {
