@@ -41,21 +41,21 @@ class Tooltip {
     let indentX = 10;
     let indentY = 10;
 
-    let PosX = e.clientX;
-    let PosY = e.clientY;
+    let posX = e.clientX;
+    let posY = e.clientY;
 
-    if (document.documentElement.clientWidth < PosX + indentX + tooltipWidth) {
-      PosX -= tooltipWidth;
+    if (document.documentElement.clientWidth < posX + indentX + tooltipWidth) {
+      posX -= tooltipWidth;
       indentX = -indentX; 
     }
 
-    if (document.documentElement.clientHeight < PosY + indentY + tooltipHeiht) {
-      PosY -= tooltipHeiht;
+    if (document.documentElement.clientHeight < posY + indentY + tooltipHeiht) {
+      posY -= tooltipHeiht;
       indentY = -indentY; 
     }
 
-    this.tooltip.style.top = indentY + PosY + "px";
-    this.tooltip.style.left = indentX + PosX + "px";
+    this.tooltip.style.top = indentY + posY + "px";
+    this.tooltip.style.left = indentX + posX + "px";
   }
 
   render(text) {
