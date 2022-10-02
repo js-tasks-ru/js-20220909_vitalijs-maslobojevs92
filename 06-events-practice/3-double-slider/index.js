@@ -1,4 +1,6 @@
 export default class DoubleSlider {
+  subElements = {};
+
   constructor({
     min = 0,
     max = 300,
@@ -164,6 +166,7 @@ export default class DoubleSlider {
 
     this.remove();
     this.doubleSlider = null;
+    this.subElements = {};
   }
 
   get element() {
