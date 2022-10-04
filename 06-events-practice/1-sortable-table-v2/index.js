@@ -23,16 +23,14 @@ export default class SortableTable {
     this.table = table;
     this.subElements = this.getSubElements(table);
 
-    if (this.sorted.id) this.sort(this.sorted.id, this.sorted.order);
-
-    else this.sort();
+    this.sort();
   }
 
   init() {
-    this.subElements.header.addEventListener('pointerdown', this.clickEvent);
+    this.subElements.header.addEventListener('pointerdown', this.sortTableOnClick);
   }
 
-  clickEvent = (e) => {
+  sortTableOnClick = (e) => {
     e.preventDefault();
     
     const field = e.target.closest('[data-sortable="true"]');
@@ -108,7 +106,7 @@ export default class SortableTable {
     }).join('');
   }
 
-  sort(fieldId, order) {
+  sort(fieldId = this.sorted.id, order = this.sorted.order) {
     if (!fieldId || !order) {
       return this.subElements.body.innerHTML = this.getBodyRows(this.data);
     }
@@ -152,10 +150,6 @@ export default class SortableTable {
   }
 
   destroy() {
-    if (this.subElements.header) {
-      this.subElements.header.removeEventListener('pointerdown', this.clickEvent);
-    }
-
     this.remove();
     this.table = null;
     this.subElements = {};
