@@ -208,15 +208,17 @@ export default class SortableTable {
   }
 
   onScrollEvent = async (e) => {
+    if (!this.data.length) document.removeEventListener('scroll', this.onScrollEvent);
+
     if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight && !this.loading && !this.isSortLocally) {
       this.dataStart += 30;
       this.dataEnd += 30;
 
       this.loading = true;
 
-      const data = await this.loadData(this.dataStart, this.dataEnd);
+      this.data = await this.loadData(this.dataStart, this.dataEnd);
 
-      this.updateTableBody(data);
+      this.updateTableBody(this.data);
 
       this.loading = false;
     }
