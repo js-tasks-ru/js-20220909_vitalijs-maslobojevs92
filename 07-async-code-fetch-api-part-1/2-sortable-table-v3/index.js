@@ -60,15 +60,14 @@ export default class SortableTable {
 
   getTemplate() {
     return `
-    <div data-element="productsContainer" class="products-list__container">
       <div class="sortable-table">
         <div data-element="header" class="sortable-table__header sortable-table__row">
           ${this.getHeaderRows()}
         </div>
-        <div data-element="body" class="sortable-table__body">
-        </div>
+        <div data-element="body" class="sortable-table__body"></div>
+
+        <div data-element="loading" class="loading-line sortable-table__loading-line"></div>
       </div>
-    </div>  
     `;
   }
 
@@ -121,13 +120,17 @@ export default class SortableTable {
   }
 
   async loadData(dataStart = this.dataStart, dataEnd = this.dataEnd) {
-    this.url.searchParams.set('_embed', 'subcategory.category');
+    //this.url.searchParams.set('_embed', 'subcategory.category');
     this.url.searchParams.set('_sort', this.sorted.id);
     this.url.searchParams.set('_order', this.sorted.order);
     this.url.searchParams.set('_start', dataStart);
     this.url.searchParams.set('_end', dataEnd);
 
+    this.table.classList.add('sortable-table_loading');
+
     this.data = await fetchJson(this.url);
+
+    this.table.classList.remove('sortable-table_loading');
 
     return this.data;
   }
